@@ -8,6 +8,7 @@ const exphbs = require("express-handlebars")
 const passport = require("passport")
 const morgan = require("morgan")
 const session = require("express-session")
+const MongoStore = require("connect-mongo")
 
 // Load Config
 dotenv.config({path: "./config/config.env"})
@@ -35,7 +36,10 @@ app.set("view engine", ".hbs")
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGO_URI
+    })
   })
 )
 
