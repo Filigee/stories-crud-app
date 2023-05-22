@@ -127,7 +127,7 @@ router.put("/:id", ensureAuth, async(req,res) => {
 router.delete("/:id", ensureAuth, async(req,res) => {
     try{
         console.log(req.params.id)
-        await Story.remove({_id: req.params.id})
+        await Story.deleteOne({_id: req.params.id})
         res.redirect("/dashboard")
     }
     catch(err){
